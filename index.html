@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffb7d5">
+  <meta name="description" content="PIXEL DIARY：我的粉色像素小宇宙，待辦、日記、扭蛋、記帳與接星星。">
+  <title>PIXEL DIARY ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-a" aria-hidden="true">✦</div><div class="ambient ambient-b" aria-hidden="true">♡</div>
+  <div class="shell">
+    <header class="topbar">
+      <div><span class="pixel-kicker">★ MY LITTLE UNIVERSE ★</span><h1>PIXEL <span>DIARY</span> ♡</h1></div>
+      <div class="top-actions">
+        <button id="bgmToggle" class="icon-btn bgm-toggle" type="button" aria-label="切換背景音樂" aria-pressed="false">♫ BGM OFF</button>
+        <button id="soundToggle" class="icon-btn" type="button" aria-label="切換遊戲音效" aria-pressed="false">♪ SFX OFF</button>
+      </div>
+    </header>
+    <div class="screen">
+      <div class="screen-meta"><span id="todayLabel"></span><span class="live-indicator">● ONLINE</span></div>
+      <main>
+        <section id="home" class="view active" aria-labelledby="homeHeading">
+          <div class="hero card">
+            <div class="tiny-line">♡ WELCOME HOME ♡</div>
+            <div class="hero-art" aria-hidden="true"><span class="sparkle sp1">✦</span><span class="sparkle sp2">✧</span><div class="pixel-friend"><i class="eye left"></i><i class="eye right"></i><i class="blush left"></i><i class="blush right"></i><i class="smile"></i></div></div>
+            <h2 id="homeHeading">今天也要閃閃發光！</h2>
+            <p id="greeting">這是只屬於你的粉色小宇宙 ♡</p>
+          </div>
+
+          <div class="card todo-card">
+            <h3 class="todo-heading">📋 待辦清單 <span id="todoCount">0 / 0</span></h3>
+            <form id="todoForm" class="todo-form">
+              <label for="todoText" class="sr-only">新增待辦事項</label>
+              <input id="todoText" maxlength="80" placeholder="新增一件要做的事…" autocomplete="off" required>
+              <button type="submit" class="primary-btn todo-add" aria-label="新增待辦">＋</button>
+            </form>
+            <ul id="todoList" class="todo-list" aria-label="待辦事項"></ul>
+            <button id="todoClearDone" class="secondary-btn todo-clear hidden" type="button">✓ 清除已完成</button>
+          </div>
+
+          <div class="home-grid">
+            <button class="feature-card peach" data-go="gacha"><span class="feature-emoji">🎰</span><strong>每日扭蛋</strong><small id="gachaStatus">今天的驚喜待領取</small><b>OPEN ↗</b></button>
+            <button class="feature-card lilac" data-go="notes"><span class="feature-emoji">📝</span><strong>我的小紙條</strong><small id="noteStatus">寫下心裡的小事</small><b>WRITE ↗</b></button>
+            <button class="feature-card mint" data-go="money"><span class="feature-emoji">🪙</span><strong>口袋記帳本</strong><small id="moneyStatus">今日花費 NT$0</small><b>CHECK ↗</b></button>
+            <button class="feature-card yellow" data-go="game"><span class="feature-emoji">⭐</span><strong>接星星</strong><small>30 秒療癒小遊戲</small><b>PLAY ↗</b></button>
+          </div>
+          <div class="footer-note">✿ little things make lovely days ✿</div>
+        </section>
+
+        <section id="gacha" class="view" aria-labelledby="gachaHeading">
+          <div class="section-intro"><span class="pixel-kicker">01 / DAILY SURPRISE</span><h2 id="gachaHeading">幸運扭蛋機 🎀</h2><p>每天抽一顆，把小小好運收進口袋。</p></div>
+          <div class="card gacha-stage"><div class="gacha-machine" id="gachaMachine" aria-hidden="true"><div class="machine-top">PIXEL LUCK</div><div class="machine-window"><span class="capsule c1"></span><span class="capsule c2"></span><span class="capsule c3"></span><span class="capsule c4"></span></div><div class="machine-bottom"><div class="machine-knob">✿</div><div class="machine-slot"></div></div></div><p id="gachaMessage" class="message" aria-live="polite">準備好今天的幸運了嗎？</p><button id="gachaDraw" class="primary-btn" type="button">✦ 抽一顆扭蛋 ✦</button></div>
+          <div class="card collection"><h3>♡ 我的收藏圖鑑 <span id="collectionCount">0 / 8</span></h3><div id="collectionGrid" class="collection-grid"></div><p class="muted small">抽到相同收藏會增加數量，每天 00:00（本機時間）重置抽取次數。</p></div>
+        </section>
+
+        <section id="notes" class="view" aria-labelledby="notesHeading">
+          <div class="section-intro"><span class="pixel-kicker">02 / LITTLE MEMOS</span><h2 id="notesHeading">我的秘密紙條 💌</h2><p>一些小事、一句心情，都值得被記住。</p></div>
+          <form id="noteForm" class="card form-card"><input type="hidden" id="noteEditId"><label for="noteTitle">紙條標題</label><input id="noteTitle" maxlength="50" placeholder="今天想記住什麼？" required><label for="noteDate">日期</label><input id="noteDate" type="date" required><label for="noteText">寫給自己的話</label><textarea id="noteText" rows="5" maxlength="2000" placeholder="今天發生了什麼可愛的小事呢？" required></textarea><div class="form-actions"><button id="noteCancel" type="button" class="secondary-btn hidden">取消編輯</button><button id="noteSave" type="submit" class="primary-btn">♡ 保存紙條</button></div></form>
+          <h3 class="list-heading">✦ 紙條盒 <span id="notesCount">0 則</span></h3><div id="notesList" class="stack"></div>
+        </section>
+
+        <section id="money" class="view" aria-labelledby="moneyHeading">
+          <div class="section-intro"><span class="pixel-kicker">03 / LITTLE WALLET</span><h2 id="moneyHeading">口袋記帳本 🪙</h2><p>簡單記下花費，讓日常更有掌握感。</p></div>
+          <div class="stat-grid"><div class="stat peach"><small>今日花費</small><strong id="todayTotal">NT$0</strong></div><div class="stat lilac"><small>本月花費</small><strong id="monthTotal">NT$0</strong></div></div>
+          <form id="expenseForm" class="card form-card"><input type="hidden" id="expenseEditId"><label for="expenseTitle">花費項目</label><input id="expenseTitle" maxlength="60" placeholder="例如：早餐、珍珠奶茶" required><div class="two-cols"><div><label for="expenseAmount">金額 NT$</label><input id="expenseAmount" type="number" min="0.01" max="999999999" step="0.01" inputmode="decimal" placeholder="0" required></div><div><label for="expenseCategory">分類</label><select id="expenseCategory"><option>飲食</option><option>交通</option><option>購物</option><option>娛樂</option><option>其他</option></select></div></div><label for="expenseDate">日期</label><input id="expenseDate" type="date" required><div class="form-actions"><button id="expenseCancel" type="button" class="secondary-btn hidden">取消編輯</button><button id="expenseSave" type="submit" class="primary-btn">＋ 記一筆花費</button></div></form>
+          <h3 class="list-heading">✦ 消費小清單 <span id="expenseCount">0 筆</span></h3><div id="expensesList" class="stack"></div>
+        </section>
+
+        <section id="game" class="view" aria-labelledby="gameHeading">
+          <div class="section-intro"><span class="pixel-kicker">04 / MINI ARCADE</span><h2 id="gameHeading">星星收集大作戰 ⭐</h2><p>滑動粉色像素小人，接住從天空掉下來的星星！</p></div>
+          <div class="game-hud">
+            <span>⭐ SCORE <b id="score">000</b></span>
+            <button id="gamePause" class="pause-btn hidden" type="button" aria-label="暫停遊戲">❚❚ PAUSE</button>
+            <span>⏳ TIME <b id="timer">30</b>s</span>
+          </div>
+          <div class="game-board-wrap">
+            <canvas id="gameCanvas" width="336" height="420" aria-label="接星星遊戲區；手機可觸控滑動，電腦使用左右方向鍵，P 鍵暫停"></canvas>
+            <div id="gameOverlay" class="game-overlay">
+              <span id="overlayIcon" class="overlay-star">⭐</span>
+              <h3 id="gameOverlayTitle">READY TO SHINE?</h3>
+              <p id="gameOverlayText">每局 30 秒，漏接也沒關係，開心最重要 ♡</p>
+              <div class="overlay-actions">
+                <button id="gameResume" type="button" class="primary-btn hidden">▶ 繼續遊戲</button>
+                <button id="gameStart" type="button" class="primary-btn">▶ START GAME</button>
+                <button id="gameQuit" type="button" class="secondary-btn hidden">結束這局</button>
+              </div>
+            </div>
+          </div>
+          <p class="game-help">⇆ 手指左右滑動／鍵盤 ← → 移動・P 鍵暫停・普通星 +10・彩虹星 +30</p>
+          <div class="card best-record">🏆 最高分 <strong id="bestScore">0</strong></div>
+        </section>
+
+        <section id="settings" class="view" aria-labelledby="settingsHeading">
+          <div class="section-intro"><span class="pixel-kicker">05 / MY SETTINGS</span><h2 id="settingsHeading">我的小設定 ⚙️</h2><p>背景音樂與資料備份都在這裡。</p></div>
+          <div class="card form-card">
+            <h3>🎵 背景音樂</h3>
+            <p class="muted">PIXEL DIARY 專屬的像素風循環小曲，由瀏覽器即時合成，不需下載音樂檔。</p>
+            <button id="bgmToggleSettings" class="primary-btn full bgm-toggle" type="button" aria-pressed="false">♫ 開啟背景音樂</button>
+            <label for="bgmVolume">音樂音量 <span id="bgmVolumeLabel">40%</span></label>
+            <input id="bgmVolume" type="range" min="0" max="100" step="5" value="40">
+            <p class="muted small">iPhone 開啟靜音模式時可能聽不到聲音；離開 App 時音樂會自動暫停。</p>
+          </div>
+          <div class="card form-card"><h3>💾 資料備份</h3><p class="muted">資料儲存在這台裝置的瀏覽器。清除網站資料可能會遺失紀錄，請定期備份。</p><button id="exportBtn" class="primary-btn full" type="button">↓ 匯出 JSON 備份</button><label class="file-btn" for="importFile">↑ 匯入 JSON 備份</label><input class="sr-only" id="importFile" type="file" accept="application/json,.json"><p class="muted small">匯入會取代目前的待辦、紙條、記帳、扭蛋紀錄、最高分與聲音設定；匯入前請先匯出備份。</p></div>
+          <div class="footer-note">MADE WITH ♡ PIXELS</div>
+        </section>
+      </main>
+    </div>
+    <nav class="bottom-nav" aria-label="功能切換"><button data-go="home" class="nav-btn active" type="button"><span>⌂</span>首頁</button><button data-go="gacha" class="nav-btn" type="button"><span>◈</span>扭蛋</button><button data-go="notes" class="nav-btn" type="button"><span>✎</span>紙條</button><button data-go="money" class="nav-btn" type="button"><span>＄</span>記帳</button><button data-go="game" class="nav-btn" type="button"><span>★</span>遊戲</button><button data-go="settings" class="nav-btn" type="button"><span>⚙</span>設定</button></nav>
+    <div class="device-bottom" aria-hidden="true"><span>✚</span><span>◉ ◉</span></div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
